@@ -31,8 +31,8 @@ exports.new = function (req, res) {
 
     // save the contact and check for errors
     user.save(function (err) {
-        // if (err)
-        //     res.json(err);
+        if (err)
+            res.json(err);
         res.json({
             message: 'New user created!',
             data: user

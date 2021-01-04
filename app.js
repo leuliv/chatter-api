@@ -4,10 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+require('dotenv').config()
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var apiRoutes = require("./routes/api-routes")
 
 var app = express();
 
@@ -22,10 +21,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/api', apiRoutes);
 
-mongoose.connect('mongodb://localhost/resthub', { useNewUrlParser: true,  useUnifiedTopology: true});
+//mongoose.connect('mongodb://localhost/resthub', { useNewUrlParser: true,  useUnifiedTopology: true});
+mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true,  useUnifiedTopology: true});
 var db = mongoose.connection;
 
 if(!db)
